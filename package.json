@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "mongodb": "^4.1.3",
+    "yargs": "^17.2.1"
+  },
+  "name": "mongo-practice",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shard520/mongo-practice.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shard520/mongo-practice/issues"
+  },
+  "homepage": "https://github.com/shard520/mongo-practice#readme"
+}
