@@ -8,22 +8,14 @@ const {
   updateMovie,
   deleteMovie,
   searchMovies,
+  filterYargs,
 } = require('./utils');
 
 const app = () => {
   try {
     switch (process.argv[2]) {
       case 'add':
-        // filter argv properties that are undefined
-        const newMovie = omitBy(
-          {
-            title: yargs.argv.title,
-            actor: yargs.argv.actor,
-            genre: yargs.argv.genre,
-            rating: yargs.argv.rating,
-          },
-          isUndefined
-        );
+        const newMovie = filterYargs();
         connection(addMovie, newMovie);
         break;
       case 'list':
@@ -49,16 +41,7 @@ const app = () => {
         connection(deleteMovie, { title: yargs.argv.title });
         break;
       case 'search':
-        // filter argv properties that are undefined
-        const searchQuery = omitBy(
-          {
-            title: yargs.argv.title,
-            actor: yargs.argv.actor,
-            genre: yargs.argv.genre,
-            rating: yargs.argv.rating,
-          },
-          isUndefined
-        );
+        const searchQuery = filterYargs();
         connection(searchMovies, searchQuery);
         break;
       case 'minRating':
