@@ -2,7 +2,7 @@ const connection = require('./db/connection');
 const yargs = require('yargs');
 const { omitBy, isUndefined } = require('lodash');
 
-const { addMovie, listMovies, updateMovie } = require('./utils');
+const { addMovie, listMovies, updateMovie, deleteMovie } = require('./utils');
 
 const app = () => {
   try {
@@ -17,6 +17,7 @@ const app = () => {
         connection(listMovies, {});
         break;
       case 'update':
+        // filter argv properties that are undefined
         const newEntry = omitBy(
           { title: yargs.argv.newTitle, actor: yargs.argv.newActor },
           isUndefined
@@ -25,6 +26,9 @@ const app = () => {
           oldEntry: { title: yargs.argv.title },
           newEntry: newEntry,
         });
+        break;
+      case 'delete':
+        connection(deleteMovie, { title: yargs.argv.title });
         break;
       default:
         console.log('Incorrect command');

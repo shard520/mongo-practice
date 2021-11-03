@@ -30,4 +30,17 @@ const updateMovie = async (
   }
 };
 
-module.exports = { addMovie, listMovies, updateMovie };
+const deleteMovie = async (collection, dataObj) => {
+  try {
+    const result = await collection.deleteOne(dataObj);
+    if (result.deletedCount === 1) {
+      console.log('Successfully deleted movie.');
+    } else {
+      console.log('No movies matched the query. Deleted 0 movies.');
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+module.exports = { addMovie, listMovies, updateMovie, deleteMovie };
