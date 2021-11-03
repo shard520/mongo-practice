@@ -1,3 +1,6 @@
+const yargs = require('yargs');
+const { omitBy, isUndefined } = require('lodash');
+
 const addMovie = async (collection, dataObj) => {
   try {
     await collection.insertOne(dataObj);
@@ -64,10 +67,23 @@ const searchMovies = async (collection, searchQuery) => {
   }
 };
 
+const filterYargs = () => {
+  return omitBy(
+    {
+      title: yargs.argv.title,
+      actor: yargs.argv.actor,
+      genre: yargs.argv.genre,
+      rating: yargs.argv.rating,
+    },
+    isUndefined
+  );
+};
+
 module.exports = {
   addMovie,
   listMovies,
   updateMovie,
   deleteMovie,
   searchMovies,
+  filterYargs,
 };
