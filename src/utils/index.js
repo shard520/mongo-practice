@@ -48,4 +48,26 @@ const deleteMovie = async (collection, dataObj) => {
   }
 };
 
-module.exports = { addMovie, listMovies, updateMovie, deleteMovie };
+const searchMovies = async (collection, searchQuery) => {
+  try {
+    const searchResults = await collection.find(searchQuery).toArray();
+    if (searchResults.length > 0) {
+      console.log(
+        `${searchResults.length} movies found that match your search`,
+        searchResults
+      );
+    } else {
+      console.log('No movies found that matched your search.');
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+module.exports = {
+  addMovie,
+  listMovies,
+  updateMovie,
+  deleteMovie,
+  searchMovies,
+};
